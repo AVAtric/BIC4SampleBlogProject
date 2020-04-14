@@ -1,28 +1,46 @@
-window._ = require('lodash');
-
 /**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
+ * Load all needed JavaScript modules for working with ajax-requests and some
+ * base compulsory functions for using data objects.
+ *
  */
 
-window.axios = require('axios');
+// Need for data-operations and ajax
+import lodash from 'lodash';
+import axios from 'axios';
 
+// Some custom modules to make developing faster
+import Form from './utilities/Form';
+import QueryMessage from './components/base/QueryMessage';
+
+window._ = lodash;
+window.axios = axios;
+window.QueryMessage = QueryMessage;
+window.Form = Form;
+
+// Set token in header for axios to keep requests secure
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
+let token = document.head.querySelector('meta[name="csrf-token"]');
 
-// import Echo from 'laravel-echo';
+if (token) {
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
 
-// window.Pusher = require('pusher-js');
+// Add open and close functionality on burger-nav
+document.addEventListener('DOMContentLoaded', () => {
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
-// });
+    if ($navbarBurgers.length > 0) {
+        $navbarBurgers.forEach( el => {
+            el.addEventListener('click', () => {
+                const target = el.dataset.target;
+                const $target = document.getElementById(target);
+
+                el.classList.toggle('is-active');
+                $target.classList.toggle('is-active');
+            });
+        });
+    }
+});
