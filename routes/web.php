@@ -18,3 +18,6 @@ Route::get('/', 'GuestController@index')->name('welcome');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('blog', 'BlogController');
+Route::resource('message', 'MessageController');

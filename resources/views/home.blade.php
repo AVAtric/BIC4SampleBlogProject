@@ -3,9 +3,6 @@
 @section('content')
     <section class="section is-fullheight">
         <div class="container">
-
-            <example-component></example-component>
-
             <div class="columns is-multiline">
                 <div class="card card column is-half is-offset-one-quarter">
                     <header class="card-header">

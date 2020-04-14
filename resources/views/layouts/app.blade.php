@@ -76,14 +76,14 @@
 
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">
-                            Templates
+                            Blog
                         </a>
 
                         <div class="navbar-dropdown">
-                            <a class="navbar-item">
+                            <a href="{{route('blog.index')}}" class="navbar-item">
                                 List
                             </a>
-                            <a class="navbar-item">
+                            <a href="{{route('blog.create')}}" class="navbar-item">
                                 Create
                             </a>
                         </div>
@@ -91,15 +91,12 @@
 
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">
-                            Fields
+                            Message
                         </a>
 
                         <div class="navbar-dropdown">
-                            <a class="navbar-item">
+                            <a href="{{route('message.index')}}" class="navbar-item">
                                 List
-                            </a>
-                            <a class="navbar-item">
-                                Create
                             </a>
                         </div>
                     </div>
@@ -146,7 +143,7 @@
     <footer class="footer">
         <div class="content has-text-centered">
             <small>
-                &copy; Adnan Vatric
+                &copy;FH Technikum Adnan Vatric
             </small>
         </div>
     </footer>
