@@ -69,7 +69,7 @@
     }
 }
 
-.chat-window{
+.chat-window {
     height: 60vh;
     overflow-y: auto;
     padding-left: 1.1rem;
@@ -77,15 +77,14 @@
     margin-bottom: 0.6rem;
 }
 
-.chat-window-small{
+.chat-window-small {
     height: 40vh;
     overflow-y: auto;
     padding-left: 1.1rem;
     padding-right: 1.1rem;
 }
 
-.break-word{
-    word-break: break-all;
+.break-word {
     word-break: break-word;
     hyphens: auto;
 }
@@ -99,3 +98,4 @@
 .hero.is-fullheight-with-navbar{
     min-height: calc(100vh - 6.75rem);
 }
+

@@ -45,7 +45,8 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Blog::first();
+        return $request;
     }
 
     /**
@@ -56,7 +57,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        //
+        return view('blog.show', compact('blog'));
     }
 
     /**

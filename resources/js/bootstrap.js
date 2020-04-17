@@ -11,10 +11,12 @@ import axios from 'axios';
 // Some custom modules to make developing faster
 import Form from './utilities/Form';
 import QueryMessage from './components/base/QueryMessage';
+import TableElement from './components/base/TableElementComponent';
 
 window._ = lodash;
 window.axios = axios;
 window.QueryMessage = QueryMessage;
+window.TableElement = TableElement;
 window.Form = Form;
 
 // Set token in header for axios to keep requests secure
