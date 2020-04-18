@@ -24,10 +24,8 @@
                                 <div class="field">
                                     <label class="label">{{ __('Message') }}</label>
                                     <div class="control">
-                                        <textarea class="textarea" name="body" id="body"
-                                                  @error('body')class="is-danger"@enderror>
-                                            {{ old('body') }}
-                                        </textarea>
+                                        <textarea name="body" id="body" @error('body')class="is-danger"@enderror
+                                        class="textarea">{{ $blog->body }}</textarea>
                                     </div>
                                     @error('body')
                                     <p class="help is-danger">{{ $message }}</p>

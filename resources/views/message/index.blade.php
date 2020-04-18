@@ -33,7 +33,7 @@
                                                 </div>
                                             </div>
                                             <footer class="card-footer">
-                                                <a href="{{ route('blog.show', $message->blog->slug) }}" class="card-footer-item">Open</a>
+                                                <a href="{{ route('blog.show', $message->blog->slug) }}" class="card-footer-item">Open blog</a>
                                             </footer>
                                         </div>
                                     </div>

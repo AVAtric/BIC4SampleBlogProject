@@ -37,8 +37,10 @@
                                     <input class="input" name="body" type="text" placeholder="What do you think about this...">
                                 </p>
                                 <p class="control">
-                                    <button type="submit" class="button is-info">
-                                        Send
+                                    <button type="submit" class="button is-info is-outlined">
+                                        <span class="icon is-small">
+                                            <i class="fa fa-paper-plane"></i>
+                                        </span>
                                     </button>
                                 </p>
                             </div>
@@ -47,7 +49,7 @@
                 </div>
             </div>
             @if($blog->messages->count())
-                @foreach($blog->messages as $message)
+                @foreach($blog->messages->sortByDesc('created_at') as $message)
                 <div class="columns is-multiline">
                     <div class="column is-half is-offset-one-quarter">
                         <div class="card">
