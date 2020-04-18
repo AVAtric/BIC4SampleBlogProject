@@ -142,9 +142,7 @@
 
     <footer class="footer">
         <div class="content has-text-centered">
-            <small>
-                &copy;FH Technikum Adnan Vatric
-            </small>
+            <small>&copy; FH Technikum Dominik Ertl, Adnan Vatric</small>
         </div>
     </footer>
 </div>

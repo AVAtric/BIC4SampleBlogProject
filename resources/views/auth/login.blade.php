@@ -1,31 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="login" class="is-fullheight-with-navbar">
-        <div class="login-card">
+    <div class="blog-form">
+        <div class="blog-card">
 
             <div class="card-title">
-                <h1>Please Sign In</h1>
+                <h1>Sign In</h1>
             </div>
 
             <div class="content">
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="field">
+                        <label class="label" for="email">Email</label>
+                        <div class="control has-icons-left">
+                            <input id="email" title="email" name="email" type="email" required
+                                   autocomplete="email" autofocus
+                                   class="input @error('email') is-danger @enderror" value="{{old('email')}}">
+                            <span class="icon is-small is-left">
+                              <i class="fa fa-user"></i>
+                            </span>
+                        </div>
                         @error('email')
-                        <p class="help is-danger">{{ $message }}</p>
+                            <p class="help is-danger">Email is not valid</p>
                         @enderror
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                               placeholder="Email" title="email" name="email" value="{{ old('email') }}" required
-                               autocomplete="email" autofocus>
                     </div>
 
                     <div class="field">
-                        @error('password')
-                        <p class="help is-danger">{{ $message }}</p>
+                        <label class="label" for="password">Password</label>
+                        <div class="control has-icons-left">
+                            <input id="password" title="password" name="password" type="password" required
+                                   autocomplete="current-password"
+                                   class="input @error('password') is-danger @enderror">
+                            <span class="icon is-small is-left">
+                              <i class="fa fa-key"></i>
+                            </span>
+                        </div>
+                        @error('email')
+                            <p class="help is-danger">Password is not valid</p>
                         @enderror
-                        <input id="password" type="password" class="@error('password') is-danger @enderror"
-                               name="password" placeholder="Password" required autocomplete="current-password">
                     </div>
 
                     <div class="level options">
@@ -42,8 +55,7 @@
                             </a>
                         @endif
                     </div>
-
-                    <button type="submit" class="btn btn-primary">{{ __('Login') }}</button>
+                    <button type="submit" class="form-button">{{ __('Login') }}</button>
                 </form>
             </div>
         </div>

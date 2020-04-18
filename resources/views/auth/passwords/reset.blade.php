@@ -1,65 +1,70 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="section is-fullheight">
-        <div class="container">
-            <div class="columns is-multiline">
-                <div class="card card column is-half is-offset-one-quarter">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                            {{ __('Reset Password') }}
-                        </p>
-                    </header>
-                    <div class="card-content">
-                        <div class="content">
-                            <form method="POST" action="{{ route('password.update') }}" id="reset-password">
-                                @csrf
+    <div class="blog-form">
+        <div class="blog-card">
 
-                                <input type="hidden" name="token" value="{{ $token }}">
+            <div class="card-title">
+                <h1>
+                    {{ __('Reset Password') }}
+                </h1>
+            </div>
 
-                                <div class="field">
-                                    <label class="label">{{ __('E-Mail Address') }}</label>
-                                    <div class="control">
-                                        <input name="email" class="input @error('email') is-danger @enderror"
-                                               type="email"
-                                               value="{{ $email ?? old('email') }}" required autocomplete="email"
-                                               autofocus>
-                                    </div>
-                                    @error('email')
-                                    <p class="help is-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
+            <div class="content">
+                <form method="POST" action="{{ route('password.update') }}" id="reset-password">
+                    @csrf
 
-                                <div class="field">
-                                    <label class="label">{{ __('Password') }}</label>
-                                    <div class="control">
-                                        <input name="password" class="input @error('password') is-danger @enderror"
-                                               type="password"
-                                               required autocomplete="new-password">
-                                    </div>
-                                    @error('password')
-                                    <p class="help is-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
+                    <input type="hidden" name="token" value="{{ $token }}">
 
-                                <div class="field">
-                                    <label class="label">{{ __('Confirm Password') }}</label>
-                                    <div class="control">
-                                        <input class="input" type="password"
-                                               id="password-confirm" name="password_confirmation"
-                                               required autocomplete="new-password">
-                                    </div>
-                                </div>
-                            </form>
+                    <div class="field">
+                        <label class="label" for="email">{{ __('E-Mail Address') }}</label>
+                        <div class="control has-icons-left">
+                            <input name="email" class="input @error('email') is-danger @enderror"
+                                   type="email" id="email"
+                                   value="{{ $email ?? old('email') }}" required autocomplete="email"
+                                   autofocus>
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                        </div>
+                        @error('email')
+                        <p class="help is-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="password">{{ __('Password') }}</label>
+                        <div class="control has-icons-left">
+                            <input name="password" class="input @error('password') is-danger @enderror"
+                                   type="password" id="password"
+                                   required autocomplete="new-password">
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-key"></i>
+                            </span>
+                        </div>
+                        @error('password')
+                        <p class="help is-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="password-confirm">{{ __('Confirm Password') }}</label>
+                        <div class="control has-icons-left">
+                            <input class="input field-spacer" type="password"
+                                   id="password-confirm" name="password_confirmation"
+                                   required autocomplete="new-password">
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-repeat"></i>
+                            </span>
                         </div>
                     </div>
-                    <footer class="card-footer">
-                        <a href="#" class="button is-primary" onclick="event.preventDefault();
+
+                    <button type="submit" class="form-button" onclick="event.preventDefault();
                                                      document.getElementById('reset-password').submit();">
-                            {{ __('Reset Password') }}</a>
-                    </footer>
-                </div>
+                        {{ __('Reset Password') }}
+                    </button>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
 @endsection

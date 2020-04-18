@@ -14769,15 +14769,6 @@ label.panel-block:hover {
   margin: 1rem 0;
 }
 
-.is-spacer {
-  margin: 1rem 0;
-}
-
-.is-vertical-center {
-  display: flex;
-  align-items: center;
-}
-
 .is-fullheight.columns {
   min-height: calc(100vh - 6.75rem);
 }
@@ -14795,6 +14786,14 @@ label.panel-block:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.card {
+  padding: 0;
+}
+
+.card .field:last-of-type {
+  margin-bottom: 1.5rem;
 }
 
 .card .card-header .card-header-title {
@@ -14828,32 +14827,6 @@ label.panel-block:hover {
   transform: translateY(1px);
 }
 
-.chat-window {
-  height: 60vh;
-  overflow-y: auto;
-  padding-left: 1.1rem;
-  padding-right: 1.1rem;
-  margin-bottom: 0.6rem;
-}
-
-.chat-window-small {
-  height: 40vh;
-  overflow-y: auto;
-  padding-left: 1.1rem;
-  padding-right: 1.1rem;
-}
-
-.break-word {
-  word-break: break-word;
-  -webkit-hyphens: auto;
-      -ms-hyphens: auto;
-          hyphens: auto;
-}
-
-.grecaptcha-badge {
-  visibility: hidden;
-}
-
 .footer {
   height: 5vh;
 }
@@ -14862,77 +14835,56 @@ label.panel-block:hover {
   min-height: calc(100vh - 6.75rem);
 }
 
-#login {
+.blog-form {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 6.75rem);
 }
 
-#login .login-card {
+.blog-form .blog-card {
   background: #fff;
   width: 24rem;
   box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.11);
+  border-radius: 5px;
 }
 
-#login .login-card .card-title {
+.blog-form .blog-card .card-title {
   background-color: #279a00;
   padding: 2rem;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
-#login .login-card .card-title h1 {
+.blog-form .blog-card .card-title h1 {
   color: #fff;
   text-align: center;
   font-size: 1.2rem;
 }
 
-#login .login-card .content {
+.blog-form .blog-card .content {
   padding: 2rem 2.5rem;
 }
 
-#login .login-card #email,
-#login .login-card #password {
-  display: block;
-  width: 100%;
-  font-size: 1rem;
-  margin-bottom: 1.75rem;
-  padding: 0.25rem 0;
-  border: none;
-  border-bottom: 1px solid #dbdbdb;
-  transition: all 0.5s;
-}
-
-#login .login-card #email:hover,
-#login .login-card #password:hover {
-  border-color: #7a7a7a;
-}
-
-#login .login-card #email:active,
-#login .login-card #email:focus,
-#login .login-card #password:active,
-#login .login-card #password:focus {
-  border-color: #2eb300;
-}
-
-#login .login-card .checkbox {
+.blog-form .blog-card .checkbox {
   color: #b5b5b5;
   font-size: 0.8rem;
 }
 
-#login .login-card .checkbox span {
+.blog-form .blog-card .checkbox span {
   margin-left: 0.5rem;
 }
 
-#login .login-card a {
+.blog-form .blog-card a {
   font-size: 0.8rem;
 }
 
-#login .login-card .options {
+.blog-form .blog-card .options {
   color: #b5b5b5;
   margin-bottom: 1.5rem;
 }
 
-#login .login-card button {
+.blog-form .blog-card .form-button {
   cursor: pointer;
   font-size: 1.2rem;
   color: #2eb300;
@@ -14945,18 +14897,14 @@ label.panel-block:hover {
   transition: color 0.5s, border-color 0.5s;
 }
 
-#login .login-card button:hover,
-#login .login-card button:focus {
+.blog-form .blog-card .form-button:hover,
+.blog-form .blog-card .form-button:focus {
   color: #218000;
   border-color: #218000;
 }
 
-#login .login-card button:active {
+.blog-form .blog-card .form-button:active {
   transform: translateY(1px);
-}
-
-label {
-  cursor: pointer;
 }
 
 .regular-checkbox {
@@ -14984,12 +14932,5 @@ label {
   top: 0;
   left: 3px;
   color: #b5b5b5;
-}
-
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-  outline: none;
 }
 
