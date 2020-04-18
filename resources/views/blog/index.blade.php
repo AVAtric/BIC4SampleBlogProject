@@ -4,22 +4,19 @@
     <section class="section is-fullwidth">
         <div class="container">
             <div class="columns is-multiline">
-                <div class="column hero is-info is-bold is-three-fifths is-offset-one-fifth">
+                <div class="column hero is-bold is-info is-three-fifths is-offset-one-fifth is-small blog-hero">
                     <div class="hero-body has-text-centered">
                         <div class="container">
                             <h1 class="title">
-                                Geiler Titel
+                                Blogs
                             </h1>
-                            <h2 class="subtitle">
-                                Bam Bam Bam!
-                            </h2>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="columns is-multiline">
                 <div class="column is-three-fifths is-offset-one-fifth">
-                    <div class="box">
+                    <div class="box custom-box">
                         <blog-list :blog-list="{{ $blogs }}"></blog-list>
                     </div>
                 </div>

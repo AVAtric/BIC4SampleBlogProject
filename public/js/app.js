@@ -19738,8 +19738,8 @@ var render = function() {
                   "a",
                   { attrs: { href: "/blog/" + blog.slug, title: blog.title } },
                   [
-                    _vm._v("\n                    " + _vm._s(blog.title) + " "),
-                    _c("i", { staticClass: "fa fa-link" })
+                    _c("i", { staticClass: "fa fa-link" }),
+                    _vm._v(" " + _vm._s(blog.title) + "\n                ")
                   ]
                 )
               ]),

@@ -37,5 +37,9 @@ $footer-padding: 1rem 2.5rem 2.5rem;
 
 // Table style
 
-$table-head-background-color: $primary;
+$table-head-background-color: darken($primary, 5%);;
 $table-head-cell-color: $white;
+$footer-background-color: $white;
+$panel-heading-background-color: darken($primary, 5%);;
+$panel-heading-color: $white;
+$panel-heading-weight: lighter;

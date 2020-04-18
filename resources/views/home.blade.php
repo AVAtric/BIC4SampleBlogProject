@@ -24,45 +24,6 @@
                     </div>
                 </div>
             </div>
-
-            <br>
-
-            <div class="columns is-multiline">
-                <div class="card column is-half is-offset-one-quarter">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                            Dashboard
-                        </p>
-                    </header>
-                    <div class="card-content">
-                        <div class="content">
-                            <form method="POST" action="{{ route('password.email') }}" id="forgot-password">
-                                @csrf
-                                <div class="field">
-                                    <label class="label">{{ __('E-Mail Address') }}</label>
-                                    <div class="control has-icons-left">
-                                        <input name="email"
-                                               class="input @error('email') is-danger @enderror"
-                                               type="email"
-                                               value="{{ old('email') }}" autocomplete="email" autofocus>
-                                        <span class="icon is-small is-left">
-                                            <i class="fa fa-envelope"></i>
-                                        </span>
-                                    </div>
-                                    @error('email')
-                                        <p class="help is-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <button type="submit" class="button is-large is-primary is-outlined is-fullwidth"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('forgot-password').submit();">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 @endsection

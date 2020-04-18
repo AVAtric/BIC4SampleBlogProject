@@ -15,7 +15,7 @@
                 <table-element element-type="td">
                     <a :href="'/blog/' + blog.slug"
                        :title="blog.title">
-                        {{ blog.title }}&nbsp;<i class="fa fa-link"></i>
+                        <i class="fa fa-link"></i>&nbsp;{{ blog.title }}
                     </a>
                 </table-element>
                 <table-element element-type="td">{{ blog.user.name }}</table-element>
