@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class BlogController extends Controller
 {
@@ -45,8 +46,10 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        return Blog::first();
-        return $request;
+        return Blog::create($request->validate([
+            'title' => 'required',
+            'body' => 'required'
+        ]));
     }
 
     /**
@@ -57,6 +60,8 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
+        $blog->load('messages', 'user');
+
         return view('blog.show', compact('blog'));
     }
 
@@ -68,7 +73,10 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
+        if(auth()->user() != $blog->user)
+            abort(403);
+
+        return view('blog.edit', compact('blog'));
     }
 
     /**
@@ -80,7 +88,12 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
-        //
+        if(auth()->user() != $blog->user)
+            abort(403);
+
+        return $blog->update($request->validate([
+                'body' => 'required'
+        ]));
     }
 
     /**
@@ -91,6 +104,7 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
+        if(auth()->user() != $blog->user)
+            abort(403);
     }
 }

@@ -68,57 +68,49 @@
 
                         <div class="navbar-dropdown">
                             <a href="{{route('blog.index')}}" class="navbar-item">
-                                List
+                                All blogs
                             </a>
                             <a href="{{route('blog.create')}}" class="navbar-item">
-                                Create
+                                Create blog
                             </a>
                         </div>
                     </div>
 
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                            Message
-                        </a>
-
-                        <div class="navbar-dropdown">
-                            <a href="{{route('message.index')}}" class="navbar-item">
-                                List
-                            </a>
-                        </div>
-                    </div>
+                    <a class="navbar-item" href="{{ route('message.index') }}">
+                        My replies
+                    </a>
                 </div>
             @endauth
 
             <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        @guest
+                @guest
+                    <div class="navbar-item">
+                        <div class="buttons">
                             <a class="button is-primary" href="{{ route('login') }}">{{ __('Login') }}</a>
                             @if (Route::has('register'))
                                 <a class="button is-light" href="{{ route('register') }}">{{ __('Register') }}</a>
                             @endif
-                        @else
-                            <div class="navbar-item has-dropdown is-hoverable">
-                                <a class="navbar-link">
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="navbar-dropdown">
-                                    <a class="navbar-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                          style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </div>
-                        @endguest
+                        </div>
                     </div>
-                </div>
+                @else
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            {{ Auth::user()->name }}
+                        </a>
+
+                        <div class="navbar-dropdown is-right">
+                            <a class="navbar-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                  style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                @endguest
             </div>
         </div>
     </nav>

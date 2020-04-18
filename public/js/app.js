@@ -1938,6 +1938,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "BlogListComponent",
   props: ['blogList'],
@@ -19711,16 +19727,18 @@ var render = function() {
                   "text-class": "has-text-centered"
                 }
               },
-              [_vm._v("Messages")]
+              [_vm._v("Replies")]
             ),
             _vm._v(" "),
             _c("table-element", { attrs: { "element-type": "th" } }, [
-              _vm._v("Create date")
+              _vm._v("Created")
             ]),
             _vm._v(" "),
             _c("table-element", { attrs: { "element-type": "th" } }, [
-              _vm._v("Modification date")
-            ])
+              _vm._v("Modified")
+            ]),
+            _vm._v(" "),
+            _c("table-element", { attrs: { "element-type": "th" } })
           ],
           1
         )
@@ -19738,7 +19756,7 @@ var render = function() {
                   "a",
                   { attrs: { href: "/blog/" + blog.slug, title: blog.title } },
                   [
-                    _c("i", { staticClass: "fa fa-link" }),
+                    _c("i", { staticClass: "fa fa-comment" }),
                     _vm._v(" " + _vm._s(blog.title) + "\n                ")
                   ]
                 )
@@ -19756,7 +19774,7 @@ var render = function() {
                     "text-class": "has-text-centered"
                   }
                 },
-                [_vm._v(_vm._s(blog.messages.length))]
+                [_vm._v(_vm._s(blog.messages.length) + "\n            ")]
               ),
               _vm._v(" "),
               _c("table-element", { attrs: { "element-type": "td" } }, [
@@ -19765,6 +19783,36 @@ var render = function() {
               _vm._v(" "),
               _c("table-element", { attrs: { "element-type": "td" } }, [
                 _vm._v(_vm._s(_vm._f("moment")(blog.updated_at, "DD.MM.YYYY")))
+              ]),
+              _vm._v(" "),
+              _c("table-element", { attrs: { "element-type": "td" } }, [
+                _c("p", { staticClass: "buttons" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-info is-outlined is-small",
+                      attrs: { href: "/blog/" + blog.slug + "/edit" }
+                    },
+                    [
+                      _c("span", { staticClass: "icon" }, [
+                        _c("i", { staticClass: "fa fa-edit" })
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-danger is-outlined is-small",
+                      attrs: { href: "/blog/" + blog.slug + "/destroy" }
+                    },
+                    [
+                      _c("span", { staticClass: "icon" }, [
+                        _c("i", { staticClass: "fa fa-remove" })
+                      ])
+                    ]
+                  )
+                ])
               ])
             ],
             1

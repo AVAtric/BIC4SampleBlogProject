@@ -17,7 +17,6 @@ class CreateMessagesTable extends Migration
             $table->id();
 
             $table->string('slug');
-            $table->string('title');
 
             $table->text('body');
 

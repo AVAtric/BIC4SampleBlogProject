@@ -16,9 +16,19 @@
             </div>
             <div class="columns is-multiline">
                 <div class="column is-three-fifths is-offset-one-fifth">
-                    <div class="box custom-box">
-                        <blog-list :blog-list="{{ $blogs }}"></blog-list>
-                    </div>
+                    @if($blogs->count())
+                        <div class="box custom-box">
+                            <blog-list :blog-list="{{ $blogs }}"></blog-list>
+                        </div>
+                    @else
+                        <div class="box">
+                            <article class="message is-danger">
+                                <div class="message-body">
+                                    No blogs found
+                                </div>
+                            </article>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

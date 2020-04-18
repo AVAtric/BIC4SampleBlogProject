@@ -24,7 +24,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        return view('message.index', ['messages' => Message::all()]);
     }
 
     /**
@@ -45,7 +45,10 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Message::create($request->validate([
+            'blog_id' => 'required|exists:App\Blog,id',
+            'body' => 'required'
+        ]));
     }
 
     /**
@@ -67,7 +70,8 @@ class MessageController extends Controller
      */
     public function edit(Message $message)
     {
-        //
+        if(auth()->user() != $message->user)
+            abort(403);
     }
 
     /**
@@ -79,7 +83,8 @@ class MessageController extends Controller
      */
     public function update(Request $request, Message $message)
     {
-        //
+        if(auth()->user() != $message->user)
+            abort(403);
     }
 
     /**
@@ -90,6 +95,7 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        //
+        if(auth()->user() != $message->user)
+            abort(403);
     }
 }

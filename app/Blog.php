@@ -2,10 +2,32 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
 {
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model)
+        {
+            $model->generateSlug();
+            $model->addUser();
+        });
+    }
+
+    protected function generateSlug()
+    {
+        $this->slug = \Illuminate\Support\Str::slug($this->title);
+    }
+
+    protected function addUser()
+    {
+        $this->user_id = auth()->user()->id;
+    }
+
     protected $guarded = ['id'];
 
     protected $dates = [

@@ -14784,25 +14784,25 @@ label.panel-block:hover {
   justify-content: center;
 }
 
-.card {
+.blog-card {
   padding: 0;
   border-radius: 5px;
 }
 
-.card header {
+.blog-card header {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
-.card .no-space {
+.blog-card .no-space {
   margin: 0 !important;
 }
 
-.card .field:last-of-type {
+.blog-card .field:last-of-type {
   margin-bottom: 1.5rem;
 }
 
-.card .card-header .card-header-title {
+.blog-card .card-header .card-header-title {
   font-size: 1.2rem;
   font-weight: lighter;
 }

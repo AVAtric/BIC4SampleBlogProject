@@ -4,7 +4,7 @@
     <section class="section is-fullheight">
         <div class="container">
             <div class="columns is-multiline">
-                <div class="card column is-half is-offset-one-quarter">
+                <div class="card blog-card column is-half is-offset-one-quarter">
                     <header class="card-header">
                         <h1 class="card-header-title is-centered">{{ __('Register') }}</h1>
                     </header>

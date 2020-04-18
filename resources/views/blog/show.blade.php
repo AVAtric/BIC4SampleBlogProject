@@ -29,10 +29,12 @@
             <div class="columns is-multiline">
                 <div class="column is-half is-offset-one-quarter">
                     <div class="box">
-                        <form>
+                        <form method="POST" action="{{ route('message.store') }}">
+                            @csrf
+                            <input type="hidden" name="blog_id" value="{{ $blog->id }}">
                             <div class="field is-grouped">
                                 <p class="control is-expanded">
-                                    <input class="input" type="text" placeholder="What do you think about this...">
+                                    <input class="input" name="body" type="text" placeholder="What do you think about this...">
                                 </p>
                                 <p class="control">
                                     <button type="submit" class="button is-info">
@@ -44,44 +46,40 @@
                     </div>
                 </div>
             </div>
-            <div class="columns is-multiline">
-                <div class="column is-half is-offset-one-quarter">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-content">
-                                    <p class="title is-4">John Smith</p>
-                                    <p class="subtitle is-6">Time ago</p>
+            @if($blog->messages->count())
+                @foreach($blog->messages as $message)
+                <div class="columns is-multiline">
+                    <div class="column is-half is-offset-one-quarter">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-content">
+                                        <p class="title is-4">{{ $message->user->name }}</p>
+                                        <p class="subtitle is-6">{{ $message->created_at->diffForHumans() }}</p>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Phasellus nec iaculis mauris.
+                                <div class="content">
+                                    {{ $message->body }}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="columns is-multiline">
-                <div class="column is-half is-offset-one-quarter">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-content">
-                                    <p class="title is-4">John Smith</p>
-                                    <p class="subtitle is-6">Created at</p>
+                @endforeach
+            @else
+                <div class="columns is-multiline">
+                    <div class="column is-half is-offset-one-quarter">
+                        <div class="box">
+                            <article class="message is-danger">
+                                <div class="message-body">
+                                    No Messages found
                                 </div>
-                            </div>
-
-                            <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Phasellus nec iaculis mauris.
-                            </div>
+                            </article>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </section>
 @endsection

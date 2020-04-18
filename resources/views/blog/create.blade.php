@@ -4,7 +4,7 @@
     <section class="section is-fullheight">
         <div class="container">
             <div class="columns is-multiline">
-                <div class="card column is-half is-offset-one-quarter">
+                <div class="card blog-card column is-half is-offset-one-quarter">
                     <header class="card-header">
                         <h1 class="card-header-title is-centered">{{ __('New blog') }}</h1>
                     </header>
@@ -34,12 +34,10 @@
                                 </div>
 
                                 <div class="field">
-                                    <label class="label">{{ __('Message') }}</label>
+                                    <label class="label" for="body">{{ __('Message') }}</label>
                                     <div class="control">
-                                        <textarea class="textarea" name="body" id="body"
-                                                  @error('body')class="is-danger"@enderror>
-                                            {{ old('body') }}
-                                        </textarea>
+                                        <textarea name="body" id="body" @error('body')class="is-danger"@enderror
+                                        class="textarea">{!! old('body') !!}</textarea>
                                     </div>
                                     @error('body')
                                     <p class="help is-danger">{{ $message }}</p>
