@@ -1,55 +1,30 @@
 <template>
-    <div class="table-container is-fullwidth">
-        <table class="table is-fullwidth is-hoverable">
-            <thead>
-            <tr class="title is-6">
-                <table-element element-type="th">Create date</table-element>
-                <table-element element-type="th">Create date</table-element>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="blog in blogs" :key="blog.id">
-                <table-element element-type="td">{{ blog.user.name }}</table-element>
-                <table-element element-type="td" text-class="has-text-centered">{{ blog.messages.length }}
-                </table-element>
-                <table-element element-type="td">{{ blog.created_at | moment('DD.MM.YYYY') }}</table-element>
-            </tr>
-            </tbody>
-        </table>
+    <div class="box">
+        <div v-for="message in myMessages" class="columns is-multiline">
+            <div class="column">
+                <div class="card blog-card">
+                    <header class="card-header">
+                        <p class="card-header-title" v-text="message.blog.title" />
+                    </header>
+                    <div class="card-content">
+                        <div class="content" v-text="message.body" />
+                    </div>
+                    <footer class="card-footer">
+                        <a :href="'/blog/' +  message.blog.slug" class="card-footer-item">Open blog</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "BlogListComponent",
-        props: ['blogList'],
-        components: {
-            TableElement
-        },
-        data() {
-            return {
-                blogs: [],
-                currentDateTime: ''
-            }
-        },
-        created() {
-            this.updateDateTime();
-        },
-        mounted() {
-            this.blogs = this.blogList;
-            this.$options.interval = setInterval(this.updateDateTime, 1000);
-        },
-        beforeDestroy() {
-            clearInterval(this.$options.interval);
-        },
-        methods: {
-            updateDateTime() {
-                this.currentDateTime = this.$moment().format('DD.MM.YYYY hh:mm:ss');
-            }
-        },
-        computed: {
-            updated() {
-                return this.currentDateTime;
+        name: "MessageListComponent",
+        props:{
+            myMessages: {
+                type: Object,
+                required: true
             }
         }
     }

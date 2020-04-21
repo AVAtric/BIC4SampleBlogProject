@@ -24,6 +24,8 @@ Vue.use(require('vue-moment'));
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('blog-list', require('./components/BlogListComponent.vue').default);
+Vue.component('message-list', require('./components/MessageListComponent.vue').default);
+Vue.component('blog-message-list', require('./components/BlogMessageListComponent.vue').default);
 
 
 /**

@@ -49,26 +49,7 @@
                 </div>
             </div>
             @if($blog->messages->count())
-                @foreach($blog->messages->sortByDesc('created_at') as $message)
-                <div class="columns is-multiline">
-                    <div class="column is-half is-offset-one-quarter">
-                        <div class="card">
-                            <div class="card-content">
-                                <div class="media">
-                                    <div class="media-content">
-                                        <p class="title is-4">{{ $message->user->name }}</p>
-                                        <p class="subtitle is-6">{{ $message->created_at->diffForHumans() }}</p>
-                                    </div>
-                                </div>
-
-                                <div class="content">
-                                    {{ $message->body }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
+                <blog-message-list :blog-messages="{{ $blog->messages->load('user')->sortByDesc('created_at') }}"></blog-message-list>
             @else
                 <div class="columns is-multiline">
                     <div class="column is-half is-offset-one-quarter">

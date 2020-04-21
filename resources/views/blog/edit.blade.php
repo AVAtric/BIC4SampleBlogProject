@@ -20,6 +20,7 @@
 
                             <form method="POST" action="{{ route('blog.update', $blog->slug) }}">
                                 @csrf
+                                @method('PUT')
 
                                 <div class="field">
                                     <label class="label">{{ __('Message') }}</label>

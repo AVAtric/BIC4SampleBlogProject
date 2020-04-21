@@ -53,30 +53,12 @@
         },
         data() {
             return {
-                blogs: [],
-                currentDateTime: ''
+                blogs: []
             }
-        },
-        created() {
-            this.updateDateTime();
         },
         mounted() {
             this.blogs = this.blogList;
-            this.$options.interval = setInterval(this.updateDateTime, 1000);
         },
-        beforeDestroy() {
-            clearInterval(this.$options.interval);
-        },
-        methods: {
-            updateDateTime() {
-                this.currentDateTime = this.$moment().format('DD.MM.YYYY hh:mm:ss');
-            }
-        },
-        computed: {
-            updated() {
-                return this.currentDateTime;
-            }
-        }
     }
 </script>
 

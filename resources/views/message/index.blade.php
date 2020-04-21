@@ -17,29 +17,7 @@
             <div class="columns is-multiline">
                 <div class="column is-three-fifths is-offset-one-fifth">
                     @if($messages->count())
-                        <div class="box">
-                            @foreach($messages as $message)
-                                <div class="columns is-multiline">
-                                    <div class="column">
-                                        <div class="card blog-card">
-                                            <header class="card-header">
-                                                <p class="card-header-title">
-                                                    {{ $message->blog->title }}
-                                                </p>
-                                            </header>
-                                            <div class="card-content">
-                                                <div class="content">
-                                                    {{ $message->body }}
-                                                </div>
-                                            </div>
-                                            <footer class="card-footer">
-                                                <a href="{{ route('blog.show', $message->blog->slug) }}" class="card-footer-item">Open blog</a>
-                                            </footer>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
+                        <message-list :my-messages="{{ $messages->load('blog')->sortByDesc('created_at') }}"></message-list>
                     @else
                         <div class="box">
                             <article class="message is-danger">
