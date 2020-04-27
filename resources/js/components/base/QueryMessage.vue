@@ -1,9 +1,11 @@
 <template>
-    <div class="alert" role="alert"
-         v-bind:class="{'alert-success': success, 'alert-danger': fail}"
-         v-if="show()">
-        {{message}}
-    </div>
+    <article class="message"
+             v-bind:class="{'is-success': success, 'is-danger': fail}"
+             v-if="show()">
+        <div class="message-body">
+            {{message}}
+        </div>
+    </article>
 </template>
 
 <script>
