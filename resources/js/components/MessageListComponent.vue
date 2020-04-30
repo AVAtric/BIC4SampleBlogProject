@@ -23,7 +23,7 @@
         name: "MessageListComponent",
         props:{
             myMessages: {
-                type: Object,
+                type: Array,
                 required: true
             }
         }
