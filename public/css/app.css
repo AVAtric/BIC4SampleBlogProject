@@ -14761,88 +14761,6 @@ label.panel-block:hover {
   padding: 1rem 2.5rem 2.5rem;
 }
 
-.main {
-  background: #F7F7F7;
-}
-
-.is-fullheight.columns {
-  min-height: calc(100vh - 6.75rem);
-}
-
-.is-fullwidth.columns {
-  width: 100%;
-}
-
-.is-fullheight.main {
-  min-height: calc(100vh - 6.75rem);
-}
-
-.is-fullheight.section {
-  min-height: calc(100vh - 6.75rem);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.blog-card {
-  padding: 0;
-  border-radius: 5px;
-}
-
-.blog-card header {
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.blog-card .no-space {
-  margin: 0 !important;
-}
-
-.blog-card .field:last-of-type {
-  margin-bottom: 1.5rem;
-}
-
-.blog-card .card-header .card-header-title {
-  font-size: 1.2rem;
-  font-weight: lighter;
-}
-
-.footer {
-  height: 5vh;
-}
-
-.hero.is-fullheight-with-navbar {
-  min-height: calc(100vh - 6.75rem);
-}
-
-.blog-hero {
-  border-radius: 5px;
-}
-
-.custom-box {
-  border-radius: 5px;
-  padding: 0;
-}
-
-.custom-box .table-container {
-  border-radius: 5px;
-}
-
-.panel .panel-block {
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-th {
-  font-weight: lighter;
-}
-
-.markdown-body {
-  display: block;
-  background-color: #fff;
-  padding: 16px;
-}
-
 .markdown-body .octicon {
   display: inline-block;
   fill: currentColor;
@@ -15843,5 +15761,81 @@ th {
 .markdown-body .task-list-item input {
   margin: 0 0.2em 0.25em -1.6em;
   vertical-align: middle;
+}
+
+.main {
+  background: #F7F7F7;
+}
+
+.is-fullheight.columns {
+  min-height: calc(100vh - 6.75rem);
+}
+
+.is-fullwidth.columns {
+  width: 100%;
+}
+
+.is-fullheight.main {
+  min-height: calc(100vh - 6.75rem);
+}
+
+.is-fullheight.section {
+  min-height: calc(100vh - 6.75rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog-card {
+  padding: 0;
+  border-radius: 5px;
+}
+
+.blog-card header {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.blog-card .no-space {
+  margin: 0 !important;
+}
+
+.blog-card .field:last-of-type {
+  margin-bottom: 1.5rem;
+}
+
+.blog-card .card-header .card-header-title {
+  font-size: 1.2rem;
+  font-weight: lighter;
+}
+
+.footer {
+  height: 5vh;
+}
+
+.hero.is-fullheight-with-navbar {
+  min-height: calc(100vh - 6.75rem);
+}
+
+.blog-hero {
+  border-radius: 5px;
+}
+
+.custom-box {
+  border-radius: 5px;
+  padding: 0;
+}
+
+.custom-box .table-container {
+  border-radius: 5px;
+}
+
+.panel .panel-block {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+th {
+  font-weight: lighter;
 }
 

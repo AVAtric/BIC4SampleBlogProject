@@ -2136,12 +2136,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+var form = new Form({
+  'blog_id': '',
+  'body': '',
+  'noReset': ['blog_id']
+});
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "BlogFormComponent",
+  components: {
+    QueryMessage: QueryMessage
+  },
   props: {
     blogId: {
       required: true,
       type: Number
+    }
+  },
+  data: function data() {
+    return {
+      form: form
+    };
+  },
+  created: function created() {
+    this.form.blog_id = this.blogId;
+  },
+  methods: {
+    submit: function submit() {
+      this.form.post('/message').then(function (response) {
+        console.log(response);
+      });
     }
   }
 });
@@ -2587,7 +2611,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.custom-strong[data-v-1432788f] {\n    color: #fff;\n}\n", ""]);
+exports.push([module.i, "\n.custom-strong[data-v-1432788f] {\n    color: #fff;\n}\n.panel-block[data-v-1432788f] {\n    display: block;\n    background-color: #fff;\n    padding: 16px;\n}\n", ""]);
 
 // exports
 
@@ -24646,16 +24670,64 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "columns is-multiline" }, [
     _c("div", { staticClass: "column is-half is-offset-one-quarter" }, [
-      _c("div", { staticClass: "box" }, [
-        _c("form", { attrs: { method: "POST", action: "/message" } }, [
-          _c("input", {
-            attrs: { type: "hidden", name: "blog_id" },
-            domProps: { value: _vm.blogId }
+      _c(
+        "div",
+        { staticClass: "box" },
+        [
+          _c("query-message", {
+            attrs: {
+              success: false,
+              fail: _vm.form.isFail(),
+              message: _vm.form.failMessage
+            }
           }),
           _vm._v(" "),
-          _vm._m(0)
-        ])
-      ])
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.submit($event)
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "field is-grouped" }, [
+                _c("p", { staticClass: "control is-expanded" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.body,
+                        expression: "form.body"
+                      }
+                    ],
+                    staticClass: "input",
+                    attrs: {
+                      type: "text",
+                      placeholder: "What do you think about this..."
+                    },
+                    domProps: { value: _vm.form.body },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "body", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ]
+          )
+        ],
+        1
+      )
     ])
   ])
 }
@@ -24664,32 +24736,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field is-grouped" }, [
-      _c("p", { staticClass: "control is-expanded" }, [
-        _c("input", {
-          staticClass: "input",
-          attrs: {
-            name: "body",
-            type: "text",
-            placeholder: "What do you think about this..."
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "control" }, [
-        _c(
-          "button",
-          {
-            staticClass: "button is-info is-outlined",
-            attrs: { type: "submit" }
-          },
-          [
-            _c("span", { staticClass: "icon is-small" }, [
-              _c("i", { staticClass: "fa fa-paper-plane" })
-            ])
-          ]
-        )
-      ])
+    return _c("p", { staticClass: "control" }, [
+      _c(
+        "button",
+        {
+          staticClass: "button is-info is-outlined",
+          attrs: { type: "submit" }
+        },
+        [
+          _c("span", { staticClass: "icon is-small" }, [
+            _c("i", { staticClass: "fa fa-paper-plane" })
+          ])
+        ]
+      )
     ])
   }
 ]
