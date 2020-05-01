@@ -42,27 +42,29 @@
             this.messages = this.blogMessages.reverse();
         },
         mounted() {
-            this.$options.interval = setInterval(this.updateMessages, 10000);
+            this.$options.interval = setInterval(this.updateMessages, 5000);
         },
         methods: {
             updateMessages() {
                 axios.get('/list/messages/' + this.blogSlug)
-                    .then(response => {
-                        this.$emit('sync-messages', response.data);
+                    .then((response) => {
                         this.messages = response.data.reverse();
+
+                        if(this.blogMessages !== this.messages.reverse())
+                            this.$emit('sync-messages', response.data);
                     });
             }
         },
         watch: {
             newMessage(newVal, oldVal) {
-                console.log(this.messages);
-                console.log(newVal);
-                console.log(oldVal);
-                if(!this.messages.length)
+                if(!this.messages.length){
                     this.messages.push(newVal);
+                }
 
                 if(this.messages.filter( message => message.id !== newVal.id) && newVal !== oldVal)
                     this.messages.unshift(newVal);
+
+                newVal = {};
             }
         }
     }

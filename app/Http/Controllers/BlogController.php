@@ -46,10 +46,15 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        return Blog::create($request->validate([
+        $blog = Blog::create($request->validate([
             'title' => 'required',
             'body' => 'required'
         ]));
+
+        $blog->{"message"} = "Blog successfully posted!";
+
+        return response($blog, 200)
+            ->header('Content-Type', 'application/json');
     }
 
     /**
@@ -91,9 +96,13 @@ class BlogController extends Controller
         if(auth()->user() != $blog->user)
             abort(403);
 
-        return $blog->update($request->validate([
+        if($blog->update($request->validate([
                 'body' => 'required'
-        ]));
+        ])))
+            return response(['message' => "Blog successfully updated!"], 200)
+                ->header('Content-Type', 'application/json');
+        else
+            abort();
     }
 
     /**

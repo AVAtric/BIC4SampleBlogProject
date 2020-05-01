@@ -41,11 +41,13 @@
         methods: {
             sendNewMessage(message) {
                 this.newMessage = message;
-                this.messages.unshift(message);
+
+                if(!this.messages.length)
+                    this.messages.push(message);
             },
             syncMessages(allMessages) {
                 if(this.messages !== allMessages)
-                    this.messages = allMessages;
+                    this.messages = allMessages.reverse();
             }
         },
         created() {

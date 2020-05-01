@@ -28,6 +28,7 @@ Vue.component('message-list', require('./components/MessageListComponent.vue').d
 Vue.component('blog-message-list', require('./components/BlogMessageListComponent.vue').default);
 Vue.component('blogs', require('./components/BlogsComponent.vue').default);
 Vue.component('blog', require('./components/BlogComponent.vue').default);
+Vue.component('blog-form', require('./components/BlogFormComponent.vue').default);
 Vue.component('replies', require('./components/RepliesComponent.vue').default);
 Vue.component('hero', require('./components/base/HeroComponent.vue').default);
 
