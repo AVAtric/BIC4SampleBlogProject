@@ -36,7 +36,7 @@
             }
         },
         created() {
-            this.messages = this.blogMessages;
+            this.messages = this.blogMessages.reverse();
         },
         mounted() {
             this.$options.interval = setInterval(this.updateMessages, 10000);
@@ -45,7 +45,7 @@
             updateMessages() {
                 axios.get('/list/messages/' + this.blogSlug)
                     .then(response => {
-                        this.messages = response.data;
+                        this.messages = response.data.reverse();
                     });
             }
         }

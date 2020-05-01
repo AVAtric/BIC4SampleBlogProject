@@ -2218,7 +2218,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.messages = this.blogMessages;
+    this.messages = this.blogMessages.reverse();
   },
   mounted: function mounted() {
     this.$options.interval = setInterval(this.updateMessages, 10000);
@@ -2228,7 +2228,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/list/messages/' + this.blogSlug).then(function (response) {
-        _this.messages = response.data;
+        _this.messages = response.data.reverse();
       });
     }
   }
