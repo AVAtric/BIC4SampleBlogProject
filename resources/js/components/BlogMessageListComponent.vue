@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="message in messages" class="columns is-multiline">
+        <div v-for="message in messages" :key="message.id" class="columns is-multiline">
             <div class="column is-half is-offset-one-quarter">
                 <div class="card">
                     <div class="card-content">
@@ -28,6 +28,9 @@
             },
             blogSlug: {
                 required: true
+            },
+            newMessage: {
+                type: Object
             }
         },
         data() {
@@ -45,8 +48,21 @@
             updateMessages() {
                 axios.get('/list/messages/' + this.blogSlug)
                     .then(response => {
+                        this.$emit('sync-messages', response.data);
                         this.messages = response.data.reverse();
                     });
+            }
+        },
+        watch: {
+            newMessage(newVal, oldVal) {
+                console.log(this.messages);
+                console.log(newVal);
+                console.log(oldVal);
+                if(!this.messages.length)
+                    this.messages.push(newVal);
+
+                if(this.messages.filter( message => message.id !== newVal.id) && newVal !== oldVal)
+                    this.messages.unshift(newVal);
             }
         }
     }

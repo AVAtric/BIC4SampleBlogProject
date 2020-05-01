@@ -53,8 +53,8 @@
             submit() {
                 this.form
                     .post('/message')
-                    .then(response => {
-                        console.log(response);
+                    .then(data => {
+                        this.$emit('new-message', data);
                     });
             }
         }

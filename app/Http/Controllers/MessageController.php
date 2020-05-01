@@ -50,7 +50,7 @@ class MessageController extends Controller
         return Message::create($request->validate([
             'blog_id' => 'required|exists:App\Blog,id',
             'body' => 'required'
-        ]));
+        ]))->load('user');
     }
 
     /**

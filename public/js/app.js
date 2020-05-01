@@ -1945,8 +1945,18 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       blog: [],
-      messages: []
+      messages: [],
+      newMessage: {}
     };
+  },
+  methods: {
+    sendNewMessage: function sendNewMessage(message) {
+      this.newMessage = message;
+      this.messages.unshift(message);
+    },
+    syncMessages: function syncMessages(allMessages) {
+      if (this.messages !== allMessages) this.messages = allMessages;
+    }
   },
   created: function created() {
     var _this = this;
@@ -2163,8 +2173,10 @@ var form = new Form({
   },
   methods: {
     submit: function submit() {
-      this.form.post('/message').then(function (response) {
-        console.log(response);
+      var _this = this;
+
+      this.form.post('/message').then(function (data) {
+        _this.$emit('new-message', data);
       });
     }
   }
@@ -2210,6 +2222,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     blogSlug: {
       required: true
+    },
+    newMessage: {
+      type: Object
     }
   },
   data: function data() {
@@ -2228,8 +2243,21 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/list/messages/' + this.blogSlug).then(function (response) {
+        _this.$emit('sync-messages', response.data);
+
         _this.messages = response.data.reverse();
       });
+    }
+  },
+  watch: {
+    newMessage: function newMessage(newVal, oldVal) {
+      console.log(this.messages);
+      console.log(newVal);
+      console.log(oldVal);
+      if (!this.messages.length) this.messages.push(newVal);
+      if (this.messages.filter(function (message) {
+        return message.id !== newVal.id;
+      }) && newVal !== oldVal) this.messages.unshift(newVal);
     }
   }
 });
@@ -24412,16 +24440,21 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
-      _c("blog-detail", { attrs: { blog: this.blog } }),
+      _c("blog-detail", { attrs: { blog: _vm.blog } }),
       _vm._v(" "),
-      _c("blog-message-form", { attrs: { "blog-id": _vm.blog.id } }),
+      _c("blog-message-form", {
+        attrs: { "blog-id": _vm.blog.id },
+        on: { "new-message": _vm.sendNewMessage }
+      }),
       _vm._v(" "),
       _vm.hasMessages
         ? _c("blog-message-list", {
             attrs: {
-              "blog-messages": this.messages,
-              "blog-slug": _vm.blog.slug
-            }
+              "blog-messages": _vm.messages,
+              "blog-slug": _vm.blog.slug,
+              "new-message": _vm.newMessage
+            },
+            on: { "sync-messages": _vm.syncMessages }
           })
         : _vm._e(),
       _vm._v(" "),
@@ -24776,33 +24809,39 @@ var render = function() {
   return _c(
     "div",
     _vm._l(_vm.messages, function(message) {
-      return _c("div", { staticClass: "columns is-multiline" }, [
-        _c("div", { staticClass: "column is-half is-offset-one-quarter" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-content" }, [
-              _c("div", { staticClass: "media" }, [
-                _c("div", { staticClass: "media-content" }, [
-                  _c("p", {
-                    staticClass: "title is-4",
-                    domProps: { textContent: _vm._s(message.user.name) }
-                  }),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "subtitle is-6" }, [
-                    _vm._v(
-                      _vm._s(_vm._f("moment")(message.created_at, "DD.MM.YYYY"))
-                    )
+      return _c(
+        "div",
+        { key: message.id, staticClass: "columns is-multiline" },
+        [
+          _c("div", { staticClass: "column is-half is-offset-one-quarter" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-content" }, [
+                _c("div", { staticClass: "media" }, [
+                  _c("div", { staticClass: "media-content" }, [
+                    _c("p", {
+                      staticClass: "title is-4",
+                      domProps: { textContent: _vm._s(message.user.name) }
+                    }),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "subtitle is-6" }, [
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("moment")(message.created_at, "DD.MM.YYYY")
+                        )
+                      )
+                    ])
                   ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", {
-                staticClass: "content",
-                domProps: { textContent: _vm._s(message.body) }
-              })
+                ]),
+                _vm._v(" "),
+                _c("div", {
+                  staticClass: "content",
+                  domProps: { textContent: _vm._s(message.body) }
+                })
+              ])
             ])
           ])
-        ])
-      ])
+        ]
+      )
     }),
     0
   )

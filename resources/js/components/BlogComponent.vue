@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <blog-detail :blog="this.blog"></blog-detail>
-        <blog-message-form :blog-id="blog.id"></blog-message-form>
-        <blog-message-list v-if="hasMessages" :blog-messages="this.messages" :blog-slug="blog.slug"></blog-message-list>
+        <blog-detail :blog="blog"></blog-detail>
+        <blog-message-form :blog-id="blog.id" @new-message="sendNewMessage"></blog-message-form>
+        <blog-message-list v-if="hasMessages" :blog-messages="messages" :blog-slug="blog.slug" :new-message="newMessage" @sync-messages="syncMessages"></blog-message-list>
         <div v-if="!hasMessages" class="columns is-multiline">
             <div class="column is-half is-offset-one-quarter">
                 <error-box message="No messages found" v-if="!hasMessages"></error-box>
@@ -34,8 +34,19 @@
         data () {
           return {
               blog: [],
-              messages: []
+              messages: [],
+              newMessage: {}
           }
+        },
+        methods: {
+            sendNewMessage(message) {
+                this.newMessage = message;
+                this.messages.unshift(message);
+            },
+            syncMessages(allMessages) {
+                if(this.messages !== allMessages)
+                    this.messages = allMessages;
+            }
         },
         created() {
             this.blog = this.currentBlog;
