@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div v-for="message in blogMessages" class="columns is-multiline">
+        <div v-for="message in messages" class="columns is-multiline">
             <div class="column is-half is-offset-one-quarter">
                 <div class="card">
                     <div class="card-content">
                         <div class="media">
                             <div class="media-content">
                                 <p class="title is-4" v-text="message.user.name"/>
-                                <p class="subtitle is-6" v-text="message.created_at"/>
+                                <p class="subtitle is-6">{{ message.created_at  | moment('DD.MM.YYYY') }}</p>
                             </div>
                         </div>
 
@@ -24,8 +24,29 @@
         name: "BlogMessageListComponent",
         props:{
             blogMessages: {
-                type: Object,
                 required: true
+            },
+            blogSlug: {
+                required: true
+            }
+        },
+        data() {
+            return {
+                messages: []
+            }
+        },
+        created() {
+            this.messages = this.blogMessages;
+        },
+        mounted() {
+            this.$options.interval = setInterval(this.updateMessages, 10000);
+        },
+        methods: {
+            updateMessages() {
+                axios.get('/list/messages/' + this.blogSlug)
+                    .then(response => {
+                        this.messages = response.data;
+                    });
             }
         }
     }

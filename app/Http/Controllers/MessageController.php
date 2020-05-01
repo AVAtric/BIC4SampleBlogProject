@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Blog;
 use App\Message;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -109,5 +110,10 @@ class MessageController extends Controller
     public function list()
     {
         return Message::all()->load('blog');
+    }
+
+    public function list_blog_messages(Blog $blog)
+    {
+        return $blog->load('messages')->messages->load('user');
     }
 }

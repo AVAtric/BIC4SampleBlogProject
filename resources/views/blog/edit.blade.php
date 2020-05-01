@@ -35,7 +35,7 @@
                                 </div>
 
                                 <button type="submit" class="button is-large is-primary is-outlined is-fullwidth">
-                                    {{ __('Post') }}
+                                    {{ __('Save') }}
                                 </button>
                             </form>
                         </div>

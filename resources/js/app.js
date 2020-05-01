@@ -22,10 +22,12 @@ Vue.use(require('vue-moment'));
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.component('dashboard', require('./components/DashboardComponent.vue').default);
 Vue.component('blog-list', require('./components/BlogListComponent.vue').default);
 Vue.component('message-list', require('./components/MessageListComponent.vue').default);
 Vue.component('blog-message-list', require('./components/BlogMessageListComponent.vue').default);
 Vue.component('blogs', require('./components/BlogsComponent.vue').default);
+Vue.component('blog', require('./components/BlogComponent.vue').default);
 Vue.component('replies', require('./components/RepliesComponent.vue').default);
 Vue.component('hero', require('./components/base/HeroComponent.vue').default);
 

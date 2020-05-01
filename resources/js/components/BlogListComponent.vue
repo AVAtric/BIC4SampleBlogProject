@@ -25,7 +25,7 @@
                 <table-element element-type="td">{{ blog.created_at | moment('DD.MM.YYYY') }}</table-element>
                 <table-element element-type="td">{{ blog.updated_at | moment('DD.MM.YYYY') }}</table-element>
                 <table-element element-type="td">
-                    <p class="buttons">
+                    <p class="buttons" v-if="user.id === blog.user.id">
                         <a :href="'/blog/' + blog.slug + '/edit'" class="button is-info is-outlined is-small">
                             <span class="icon">
                               <i class="fa fa-edit"></i>
@@ -47,7 +47,14 @@
 <script>
     export default {
         name: "BlogListComponent",
-        props: ['blogList'],
+        props: {
+            blogList: {
+                required: true
+            },
+            user: {
+                required: true
+            }
+        },
         components: {
             TableElement
         },
@@ -58,7 +65,7 @@
         },
         mounted() {
             this.blogs = this.blogList;
-        },
+        }
     }
 </script>
 

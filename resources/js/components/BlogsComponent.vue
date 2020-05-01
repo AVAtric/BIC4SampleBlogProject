@@ -4,7 +4,7 @@
         <div class="columns is-multiline">
             <div class="column is-three-fifths is-offset-one-fifth">
                 <div class="box custom-box" v-if="hasBlogs">
-                    <blog-list :blog-list="blogs"></blog-list>
+                    <blog-list :blog-list="blogs" :user="user"></blog-list>
                 </div>
                 <error-box message="No blogs found" v-if="!hasBlogs"></error-box>
             </div>
@@ -24,17 +24,23 @@
         name: "BlogsComponent",
         data() {
             return {
-                'blogs': []
+                blogs: [],
+                user: {}
             }
         },
         props: {
             allBlogs: {
                 type: Array,
                 required: true
+            },
+            currentUser: {
+                type: Object,
+                required: true
             }
         },
         created() {
             this.blogs = this.allBlogs;
+            this.user = this.currentUser;
         },
         computed: {
             hasBlogs() {

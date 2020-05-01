@@ -22,7 +22,9 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "dompurify": "^2.0.10",
         "font-awesome": "^4.7.0",
+        "marked": "^1.0.0",
         "vue-moment": "^4.1.0"
     }
 }

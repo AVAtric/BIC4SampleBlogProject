@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/list/messages', 'MessageController@list')->name('message.list');
+Route::get('/list/messages/{blog}', 'MessageController@list_blog_messages')->name('message.blog.list');
 
 Route::resource('blog', 'BlogController');
 Route::resource('message', 'MessageController');
