@@ -1,6 +1,6 @@
 <template>
     <div class="box">
-        <query-message :fail="true" :success="false" :message="message"></query-message>
+        <query-message :fail="false" :success="true" :message="message"></query-message>
     </div>
 </template>
 
@@ -8,7 +8,7 @@
     import QueryMessage from "./QueryMessageComponent";
 
     export default {
-        name: "ErrorBoxComponent",
+        name: "SuccessBoxComponent",
         props:{
             message: {
                 type: String,

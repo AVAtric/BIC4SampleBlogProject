@@ -1,6 +1,6 @@
 <template>
     <div class="box">
-        <div v-for="message in myMessages" class="columns is-multiline">
+        <div v-for="message in messages" class="columns is-multiline">
             <div class="column">
                 <div class="card blog-card">
                     <header class="card-header">
@@ -10,7 +10,22 @@
                         <div class="content" v-text="message.body" />
                     </div>
                     <footer class="card-footer">
-                        <a :href="'/blog/' +  message.blog.slug" class="card-footer-item">Open blog</a>
+                        <a :href="'/blog/' +  message.blog.slug" class="card-footer-item">
+                            <span class="icon">
+                                <i class="fa fa-comment"></i>
+                            </span>
+                        </a>
+                        <a :href="'/message/' + message.slug + '/edit'" class="card-footer-item">
+                            <span class="icon">
+                              <i class="fa fa-edit"></i>
+                            </span>
+                        </a>
+                        <a @click="openDeleteModal(message)"
+                                class="card-footer-item">
+                            <span class="icon">
+                              <i class="fa fa-remove"></i>
+                            </span>
+                        </a>
                     </footer>
                 </div>
             </div>
@@ -22,9 +37,20 @@
     export default {
         name: "MessageListComponent",
         props:{
-            myMessages: {
+            messages: {
                 type: Array,
                 required: true
+            }
+        },
+        methods: {
+            openDeleteModal(message) {
+                this.$emit('open-modal',
+                    {
+                        id: message.id,
+                        title: 'Delete confirmation',
+                        content: 'Do you really want to delete this message?',
+                        url: '/message/' + message.slug
+                    });
             }
         }
     }

@@ -5,6 +5,7 @@
             <tr class="title is-6">
                 <table-element element-type="th">Title</table-element>
                 <table-element element-type="th">User</table-element>
+                <table-element element-type="th" v-if="showCategory">Category</table-element>
                 <table-element element-type="th" text-class="has-text-centered">Replies</table-element>
                 <table-element element-type="th">Created</table-element>
                 <table-element element-type="th">Modified</table-element>
@@ -20,6 +21,7 @@
                     </a>
                 </table-element>
                 <table-element element-type="td">{{ blog.user.name }}</table-element>
+                <table-element element-type="td" v-if="showCategory">{{ blog.category.name }}</table-element>
                 <table-element element-type="td" text-class="has-text-centered">{{ blog.messages.length }}
                 </table-element>
                 <table-element element-type="td">{{ blog.created_at | moment('DD.MM.YYYY') }}</table-element>
@@ -31,11 +33,12 @@
                               <i class="fa fa-edit"></i>
                             </span>
                         </a>
-                        <a :href="'/blog/' + blog.slug + '/destroy'" class="button is-danger is-outlined is-small">
+                        <button v-if="!blog.messages.length" @click="openDeleteModal(blog)"
+                                class="button is-danger is-outlined is-small">
                             <span class="icon">
                               <i class="fa fa-remove"></i>
                             </span>
-                        </a>
+                        </button>
                     </p>
                 </table-element>
             </tr>
@@ -53,6 +56,10 @@
             },
             user: {
                 required: true
+            },
+            showCategory: {
+                required: false,
+                default: true
             }
         },
         components: {
@@ -63,8 +70,24 @@
                 blogs: []
             }
         },
-        mounted() {
+        methods: {
+            openDeleteModal(blog) {
+                this.$emit('open-modal',
+                    {
+                        id: blog.id,
+                        title: blog.title,
+                        content: 'Do you really want to delete this blog?',
+                        url: '/blog/' + blog.slug
+                    });
+            }
+        },
+        created() {
             this.blogs = this.blogList;
+        },
+        watch: {
+            blogList(newVal) {
+                this.blogs = newVal;
+            }
         }
     }
 </script>

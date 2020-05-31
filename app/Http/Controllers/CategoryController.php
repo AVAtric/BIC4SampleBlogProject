@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Blog;
+use App\Category;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class BlogController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,7 +27,7 @@ class BlogController extends Controller
     public function index()
     {
         return response()
-            ->view('blog.index', ['blogs' => Blog::with(['user', 'messages', 'category'])->get()]);
+            ->view('category.index', ['categories' => Category::all()]);
     }
 
     /**
@@ -38,7 +38,7 @@ class BlogController extends Controller
     public function create()
     {
         return response()
-            ->view('blog.create');
+            ->view('category.create');
     }
 
     /**
@@ -49,85 +49,88 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $blog = Blog::create($request->validate([
-            'title' => 'required|unique:App\Blog,title',
-            'body' => 'required',
-            'category_id' => 'required|exists:App\Category,id'
+        $category = Category::create($request->validate([
+            'name' => 'required|unique:App\Category,name',
+            'description' => 'required'
         ]));
 
-        $blog->{"message"} = "Blog successfully posted!";
+        $category->{"message"} = "Category successfully added!";
 
-        return response($blog, 200)
+        return response($category, 200)
             ->header('Content-Type', 'application/json');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Blog $blog
+     * @param Category $category
      * @return Response
      */
-    public function show(Blog $blog)
+    public function show(Category $category)
     {
-        $blog->load('messages', 'user');
+        $category->load('blogs');
 
         return response()
-            ->view('blog.show', compact('blog'));
+            ->view('category.show', compact('category'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Blog $blog
+     * @param Category $category
      * @return Response
      */
-    public function edit(Blog $blog)
+    public function edit(Category $category)
     {
-        if(auth()->id() != $blog->user_id)
-            abort(403);
-
         return response()
-            ->view('blog.edit', compact('blog'));
+            ->view('category.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param Blog $blog
+     * @param Category $category
      * @return Response
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, Category $category)
     {
-        if(auth()->id() != $blog->user_id)
-            abort(403);
-
-        if($blog->update($request->validate([
-                'body' => 'required',
-                'category_id' => 'required|exists:App\Category,id'
+        if($category->update($request->validate([
+            'description' => 'required'
         ])))
-            return response(['message' => "Blog successfully updated!"], 200)
+            return response(['message' => "Category successfully updated!"], 200)
                 ->header('Content-Type', 'application/json');
         else
-            abort('500');
+            abort(500);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Blog $blog
+     * @param Category $category
      * @return Response
      * @throws Exception
      */
-    public function destroy(Blog $blog)
+    public function destroy(Category $category)
     {
-        if(auth()->id() != $blog->user_id && !$blog->messages->count())
+        if($category->blogs->count())
             abort(403);
 
-        if($blog->delete())
-            return response(['message' => "Blog deleted!"], 200)
+        if($category->delete())
+            return response(['message' => "Category deleted!"], 200)
                 ->header('Content-Type', 'application/json');
         else
-            abort('500');
+            abort(500);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function list()
+    {
+        return response(Category::all()->load('blogs'), 200)
+            ->header('Content-Type', 'application/json');
     }
 }

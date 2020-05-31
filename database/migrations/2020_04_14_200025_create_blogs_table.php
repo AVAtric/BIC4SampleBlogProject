@@ -16,12 +16,13 @@ class CreateBlogsTable extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
 
-            $table->string('slug');
-            $table->string('title');
+            $table->string('slug')->unique();
+            $table->string('title')->unique();
 
             $table->text('body');
 
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('category_id');
 
             $table->timestamps();
         });

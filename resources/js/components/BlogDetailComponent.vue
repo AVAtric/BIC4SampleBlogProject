@@ -9,7 +9,10 @@
                         </div>
                         <div class="level-right">
                             <p class="level-item has-text-centered">
-                                <small><strong class="custom-strong">{{ this.blog.user.name }}</strong> posted on&nbsp;{{ this.blog.created_at | moment('DD.MM.YYYY') }}</small>
+                                <small>
+                                    <strong class="custom-strong">{{ this.blog.user.name }}</strong>
+                                    posted on&nbsp;{{this.blog.created_at | moment('DD.MM.YYYY') }}
+                                </small>
                             </p>
                         </div>
                     </div>
@@ -48,6 +51,7 @@
     .custom-strong {
         color: #fff;
     }
+
     .panel-block {
         display: block;
         background-color: #fff;

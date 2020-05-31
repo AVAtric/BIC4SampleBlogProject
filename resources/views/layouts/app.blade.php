@@ -63,15 +63,30 @@
 
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">
+                            Category
+                        </a>
+
+                        <div class="navbar-dropdown">
+                            <a href="{{route('category.index')}}" class="navbar-item">
+                                List
+                            </a>
+                            <a href="{{route('category.create')}}" class="navbar-item">
+                                Create
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
                             Blog
                         </a>
 
                         <div class="navbar-dropdown">
                             <a href="{{route('blog.index')}}" class="navbar-item">
-                                All blogs
+                                List
                             </a>
                             <a href="{{route('blog.create')}}" class="navbar-item">
-                                Create blog
+                                Create
                             </a>
                         </div>
                     </div>

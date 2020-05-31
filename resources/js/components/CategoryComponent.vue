@@ -1,11 +1,10 @@
 <template>
     <div class="container">
-        <hero main-title="Blogs"></hero>
+        <hero :main-title="category.name" :sub-title="category.description" />
         <div class="columns is-multiline">
             <div class="column is-three-fifths is-offset-one-fifth">
-                <success-box :message="successMessage" v-if="showSuccessMessage"></success-box>
                 <div class="box custom-box" v-if="hasBlogs">
-                    <blog-list :blog-list="blogs" :user="user" v-on:open-modal="setModal"></blog-list>
+                    <blog-list :blog-list="this.categoryBlogs" :user="user" :show-category="false" v-on:open-modal="setModal"></blog-list>
                 </div>
                 <error-box message="No blogs found" v-if="!hasBlogs"></error-box>
             </div>
@@ -19,33 +18,21 @@
     import BlogList from './BlogListComponent';
 
     export default {
+        name: "CategoryComponent",
         components: {
-            BlogList,
             ErrorBox,
-            SuccessBox,
+            BlogList,
             DeleteModal
         },
-        name: "BlogsComponent",
         data() {
             return {
-                blogs: [],
-                user: {},
                 modalActive: false,
                 modalTitle: '',
                 modalContent: '',
                 modalUrl: '',
                 modalId: 0,
-                successMessage: ''
-            }
-        },
-        props: {
-            allBlogs: {
-                type: Array,
-                required: true
-            },
-            currentUser: {
-                type: Object,
-                required: true
+                successMessage: '',
+                categoryBlogs: []
             }
         },
         methods: {
@@ -53,7 +40,7 @@
                 this.modalActive = !this.modalActive;
 
                 if(info.id !== 0) {
-                    this.blogs = _.remove(this.blogs, blg => blg.id !== info.id);
+                    this.categoryBlogs = _.remove(this.categoryBlogs, blg => blg.id !== info.id);
                     this.successMessage = info.message;
                 }
             },
@@ -65,19 +52,28 @@
                 this.toggleModal({id: 0});
             }
         },
+        props: {
+            category: {
+                required: true
+            },
+            user: {
+                required: true
+            },
+            blogs: {
+                required: true
+            }
+        },
         created() {
-            this.blogs = this.allBlogs;
-            this.user = this.currentUser;
+            this.categoryBlogs = this.blogs;
         },
         computed: {
             hasBlogs() {
-                return !!this.blogs.length;
+                return !!this.categoryBlogs.length;
             },
             showSuccessMessage() {
                 return this.successMessage !== '';
             }
         }
-
     }
 </script>
 

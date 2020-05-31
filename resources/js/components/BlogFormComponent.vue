@@ -3,7 +3,7 @@
         <div class="columns is-multiline">
             <div class="card blog-card column is-half is-offset-one-quarter">
                 <header class="card-header">
-                    <h1 class="card-header-title is-centered" v-text="edit ? form.title : 'New blog'" />
+                    <h1 class="card-header-title is-centered" v-text="edit ? form.title : 'New blog'"/>
                 </header>
                 <div class="card-content">
                     <div class="content">
@@ -19,7 +19,24 @@
                                            v-bind:class="{ 'is-danger': form.errors.has('title')}"
                                            type="text" autofocus>
                                 </div>
-                                <p class="help is-danger" v-if="form.errors.has('title')" v-text="form.errors.get('title')" />
+                                <p class="help is-danger" v-if="form.errors.has('title')"
+                                   v-text="form.errors.get('title')"/>
+                            </div>
+
+                            <div class="field">
+                                <label class="label" for="category">Category</label>
+                                <div class="control">
+                                    <div class="select is-fullwidth" :class="loading ? 'is-loading' : ''">
+                                        <select id="category" :disabled="loading" v-model="form.category_id">
+                                            <option v-if="loading" :value="this.form.category_id"> Loading...</option>
+                                            <option v-for="cat in categories" v-if="!loading" v-text="cat.name"
+                                                    :value="cat.id"/>
+                                        </select>
+                                    </div>
+                                </div>
+                                <p class="help is-danger" v-if="form.errors.has('category_id')"
+                                   v-text="form.errors.get('category_id')"/>
+                                <p v-if="noCategories" class="help is-warning">Add some categories to create blogs!</p>
                             </div>
 
                             <div class="field">
@@ -27,11 +44,17 @@
                                 <div class="control">
                                     <textarea id="body" v-model="form.body" class="textarea"></textarea>
                                 </div>
-                                <p class="help is-danger" v-if="form.errors.has('body')" v-text="form.errors.get('body')" />
-                                <p class="help">You can use <a target="_blank" href="https://daringfireball.net/projects/markdown/syntax">Markdown</a> syntax here</p>
+                                <p class="help is-danger" v-if="form.errors.has('body')"
+                                   v-text="form.errors.get('body')"/>
+                                <p class="help">
+                                    You can use <a target="_blank"
+                                                   href="https://daringfireball.net/projects/markdown/syntax">
+                                    Markdown</a> syntax here.
+                                </p>
                             </div>
 
-                            <button type="submit" class="button is-large is-primary is-outlined is-fullwidth" v-text="edit ? 'Save' : 'Post'" />
+                            <button type="submit" class="button is-large is-primary is-outlined is-fullwidth"
+                                    v-text="edit ? 'Save' : 'Post'" :disabled="loading"/>
                         </form>
                     </div>
                 </div>
@@ -45,6 +68,8 @@
         'blog_id': '',
         'title': '',
         'body': '',
+        'category_id': '',
+        'noReset': ['category_id']
     });
 
     export default {
@@ -65,13 +90,16 @@
         },
         data() {
             return {
+                edit: undefined,
                 form: form,
-                url: ''
+                url: '',
+                categories: [],
+                noCategories: false
             }
         },
         methods: {
             submit() {
-                if(this.edit)
+                if (this.edit)
                     this.form
                         .put(this.url);
                 else
@@ -83,26 +111,51 @@
                             this.form.blog_id = response.blog_id;
                             this.form.title = response.title;
                             this.form.body = response.body;
+                            this.form.category_id = response.category_id;
 
-                            this.form.noReset = ['blog_id', 'title', 'body'];
+                            this.form.noReset = ['blog_id', 'title', 'body', 'category_id'];
 
                             this.edit = true;
+
+                            window.history.pushState("", "", this.url);
                         });
             }
         },
         created() {
+            axios.get('/list/categories')
+                .then(response => {
+                    this.categories = response.data;
+
+                    if (this.loading)
+                        this.noCategories = true;
+                });
+
             this.edit = this.isEditable;
 
-            if(this.edit) {
+            if (this.edit) {
                 this.url = '/blog/' + this.currentBlog.slug;
                 this.form.blog_id = this.currentBlog.id;
                 this.form.title = this.currentBlog.title;
                 this.form.body = this.currentBlog.body;
+                this.form.category_id = this.currentBlog.category_id;
 
-                this.form.noReset = ['blog_id', 'title', 'body'];
-            }
-            else {
+                this.form.noReset = ['blog_id', 'title', 'body', 'category_id'];
+            } else {
                 this.url = '/blog';
+            }
+        },
+
+        computed: {
+            loading() {
+                return !this.categories.length
+            }
+        },
+
+        watch: {
+            categories() {
+                if (!this.loading && this.form.category_id === '') {
+                    this.form.category_id = _.first(this.categories).id;
+                }
             }
         }
     }

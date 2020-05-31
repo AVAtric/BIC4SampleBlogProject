@@ -1,13 +1,12 @@
 <template>
     <div class="container">
-        <hero main-title="Blogs"></hero>
+        <hero main-title="Categories"></hero>
         <div class="columns is-multiline">
             <div class="column is-three-fifths is-offset-one-fifth">
-                <success-box :message="successMessage" v-if="showSuccessMessage"></success-box>
-                <div class="box custom-box" v-if="hasBlogs">
-                    <blog-list :blog-list="blogs" :user="user" v-on:open-modal="setModal"></blog-list>
+                <div class="box custom-box" v-if="hasCategories">
+                    <category-list :categories="categories" v-on:open-modal="setModal"></category-list>
                 </div>
-                <error-box message="No blogs found" v-if="!hasBlogs"></error-box>
+                <error-box message="No categories found" v-if="!hasCategories"></error-box>
             </div>
         </div>
         <delete-modal :title="modalTitle" :delete-url="modalUrl" :active="modalActive" :content="modalContent"
@@ -16,20 +15,18 @@
 </template>
 
 <script>
-    import BlogList from './BlogListComponent';
+    import CategoryList from './CategoryListComponent';
 
     export default {
-        components: {
-            BlogList,
+        components:{
+            CategoryList,
             ErrorBox,
-            SuccessBox,
             DeleteModal
         },
-        name: "BlogsComponent",
+        name: "CategoriesComponent",
         data() {
             return {
-                blogs: [],
-                user: {},
+                categories: [],
                 modalActive: false,
                 modalTitle: '',
                 modalContent: '',
@@ -39,12 +36,8 @@
             }
         },
         props: {
-            allBlogs: {
+            allCategories: {
                 type: Array,
-                required: true
-            },
-            currentUser: {
-                type: Object,
                 required: true
             }
         },
@@ -53,7 +46,7 @@
                 this.modalActive = !this.modalActive;
 
                 if(info.id !== 0) {
-                    this.blogs = _.remove(this.blogs, blg => blg.id !== info.id);
+                    this.categories = _.remove(this.categories, cat => cat.id !== info.id);
                     this.successMessage = info.message;
                 }
             },
@@ -66,12 +59,11 @@
             }
         },
         created() {
-            this.blogs = this.allBlogs;
-            this.user = this.currentUser;
+            this.categories = this.allCategories;
         },
         computed: {
-            hasBlogs() {
-                return !!this.blogs.length;
+            hasCategories() {
+                return !!this.categories.length;
             },
             showSuccessMessage() {
                 return this.successMessage !== '';

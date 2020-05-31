@@ -7,7 +7,8 @@
                 <form @submit.prevent="submit">
                     <div class="field is-grouped">
                         <p class="control is-expanded">
-                            <input class="input" v-model="form.body" type="text" placeholder="What do you think about this...">
+                            <input class="input" v-model="form.body" type="text"
+                                   placeholder="What do you think about this...">
                         </p>
                         <p class="control">
                             <button type="submit" class="button is-info is-outlined">
@@ -51,11 +52,10 @@
         },
         methods: {
             submit() {
-                this.form
-                    .post('/message')
-                    .then(data => {
-                        this.$emit('new-message', data);
-                    });
+                if (this.form.body !== '')
+                    this.form
+                        .post('/message')
+                        .then(data => this.$emit('new-message', data));
             }
         }
     }

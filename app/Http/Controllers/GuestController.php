@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class GuestController extends Controller
 {
@@ -19,10 +19,10 @@ class GuestController extends Controller
     /**
      * Get index page for guest users
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Response
      */
     public function index()
     {
-        return view('welcome');
+        return response()->view('welcome');
     }
 }
