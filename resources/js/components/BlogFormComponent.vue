@@ -40,7 +40,7 @@
                             </div>
 
                             <div class="field">
-                                <label class="label" for="body">Message</label>
+                                <label class="label" for="body">Body</label>
                                 <div class="control">
                                     <textarea id="body" v-model="form.body" class="textarea"></textarea>
                                 </div>

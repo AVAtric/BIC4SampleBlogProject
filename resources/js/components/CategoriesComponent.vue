@@ -3,6 +3,7 @@
         <hero main-title="Categories"></hero>
         <div class="columns is-multiline">
             <div class="column is-three-fifths is-offset-one-fifth">
+                <success-box :message="successMessage" v-if="showSuccessMessage"></success-box>
                 <div class="box custom-box" v-if="hasCategories">
                     <category-list :categories="categories" v-on:open-modal="setModal"></category-list>
                 </div>
@@ -21,6 +22,7 @@
         components:{
             CategoryList,
             ErrorBox,
+            SuccessBox,
             DeleteModal
         },
         name: "CategoriesComponent",
