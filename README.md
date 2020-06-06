@@ -7,7 +7,7 @@ Categories and blogs can be created. Every blog belongs to a category.
 Comments can be done on blogs. A blog can have many comments.
 Comments will be named messages or replies.
 
-## Usage
+## Functionality
 
 ### Dashboard
 
